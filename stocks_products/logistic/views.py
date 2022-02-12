@@ -1,3 +1,4 @@
+from rest_framework.filters import SearchFilter
 from rest_framework.viewsets import ModelViewSet
 
 from logistic.models import Product, Stock
@@ -14,3 +15,5 @@ class StockViewSet(ModelViewSet):
     queryset = Stock.objects.all()
     serializer_class = StockSerializer
     # при необходимости добавьте параметры фильтрации
+    filter_backends = [SearchFilter]
+    search_fields = ['positions__product__title', 'positions__product__description']
